@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 
 
 # **create_zone**
-> Zone create_zone(server_id, opts)
+> Zone create_zone(server_id, zone_struct, opts)
 
 Creates a new domain, returns the Zone on creation.
 
@@ -204,13 +204,15 @@ api_instance = PowerDNS::ZonesApi.new
 
 server_id = "server_id_example" # String | The id of the server to retrieve
 
+zone_struct = PowerDNS::Zone.new # Zone | The zone struct to patch with
+
 opts = { 
   rrsets: true # BOOLEAN | “true” (default) or “false”, whether to include the “rrsets” in the response Zone object.
 }
 
 begin
   #Creates a new domain, returns the Zone on creation.
-  result = api_instance.create_zone(server_id, opts)
+  result = api_instance.create_zone(server_id, zone_struct, opts)
   p result
 rescue PowerDNS::ApiError => e
   puts "Exception when calling ZonesApi->create_zone: #{e}"
@@ -222,6 +224,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **server_id** | **String**| The id of the server to retrieve | 
+ **zone_struct** | [**Zone**](Zone.md)| The zone struct to patch with | 
  **rrsets** | **BOOLEAN**| “true” (default) or “false”, whether to include the “rrsets” in the response Zone object. | [optional] [default to true]
 
 ### Return type

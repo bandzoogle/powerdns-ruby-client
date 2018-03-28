@@ -196,26 +196,32 @@ module PowerDNS
     end
     # Creates a new domain, returns the Zone on creation.
     # @param server_id The id of the server to retrieve
+    # @param zone_struct The zone struct to patch with
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :rrsets “true” (default) or “false”, whether to include the “rrsets” in the response Zone object. (default to true)
     # @return [Zone]
-    def create_zone(server_id, opts = {})
-      data, _status_code, _headers = create_zone_with_http_info(server_id, opts)
+    def create_zone(server_id, zone_struct, opts = {})
+      data, _status_code, _headers = create_zone_with_http_info(server_id, zone_struct, opts)
       data
     end
 
     # Creates a new domain, returns the Zone on creation.
     # @param server_id The id of the server to retrieve
+    # @param zone_struct The zone struct to patch with
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :rrsets “true” (default) or “false”, whether to include the “rrsets” in the response Zone object.
     # @return [Array<(Zone, Fixnum, Hash)>] Zone data, response status code and response headers
-    def create_zone_with_http_info(server_id, opts = {})
+    def create_zone_with_http_info(server_id, zone_struct, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ZonesApi.create_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
         fail ArgumentError, "Missing the required parameter 'server_id' when calling ZonesApi.create_zone"
+      end
+      # verify the required parameter 'zone_struct' is set
+      if @api_client.config.client_side_validation && zone_struct.nil?
+        fail ArgumentError, "Missing the required parameter 'zone_struct' when calling ZonesApi.create_zone"
       end
       # resource path
       local_var_path = '/servers/{server_id}/zones'.sub('{' + 'server_id' + '}', server_id.to_s)
@@ -235,7 +241,7 @@ module PowerDNS
       form_params = {}
 
       # http body (model)
-      post_body = nil
+      post_body = @api_client.object_to_http_body(zone_struct)
       auth_names = ['APIKeyHeader']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
