@@ -10,7 +10,7 @@ Swagger Codegen version: 2.3.1
 
 =end
 
-require "uri"
+require 'uri'
 
 module PowerDNS
   class SearchApi
@@ -19,7 +19,6 @@ module PowerDNS
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-
     # Search the data inside PowerDNS
     # Search the data inside PowerDNS for search_term and return at most max_results. This includes zones, records and comments. The * character can be used in search_term as a wildcard character and the ? character can be used as a wildcard for a single character.
     # @param server_id The id of the server to retrieve
@@ -29,7 +28,7 @@ module PowerDNS
     # @return [SearchResults]
     def search_data(server_id, q, max, opts = {})
       data, _status_code, _headers = search_data_with_http_info(server_id, q, max, opts)
-      return data
+      data
     end
 
     # Search the data inside PowerDNS
@@ -41,7 +40,7 @@ module PowerDNS
     # @return [Array<(SearchResults, Fixnum, Hash)>] SearchResults data, response status code and response headers
     def search_data_with_http_info(server_id, q, max, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SearchApi.search_data ..."
+        @api_client.config.logger.debug 'Calling API: SearchApi.search_data ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -56,7 +55,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'max' when calling SearchApi.search_data"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/search-data".sub('{' + 'server_id' + '}', server_id.to_s)
+      local_var_path = '/servers/{server_id}/search-data'.sub('{' + 'server_id' + '}', server_id.to_s)
 
       # query parameters
       query_params = {}
@@ -88,27 +87,24 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Query the log, filtered by search_term.
-    # 
     # @param server_id The id of the server to retrieve
     # @param q The string to search for
     # @param [Hash] opts the optional parameters
     # @return [Array<String>]
     def search_log(server_id, q, opts = {})
       data, _status_code, _headers = search_log_with_http_info(server_id, q, opts)
-      return data
+      data
     end
 
     # Query the log, filtered by search_term.
-    # 
     # @param server_id The id of the server to retrieve
     # @param q The string to search for
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<String>, Fixnum, Hash)>] Array<String> data, response status code and response headers
     def search_log_with_http_info(server_id, q, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: SearchApi.search_log ..."
+        @api_client.config.logger.debug 'Calling API: SearchApi.search_log ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -119,7 +115,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'q' when calling SearchApi.search_log"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/search-log".sub('{' + 'server_id' + '}', server_id.to_s)
+      local_var_path = '/servers/{server_id}/search-log'.sub('{' + 'server_id' + '}', server_id.to_s)
 
       # query parameters
       query_params = {}

@@ -10,7 +10,7 @@ Swagger Codegen version: 2.3.1
 
 =end
 
-require "uri"
+require 'uri'
 
 module PowerDNS
   class ConfigApi
@@ -19,32 +19,29 @@ module PowerDNS
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-
     # Returns all ConfigSettings for a single server
-    # 
     # @param server_id The id of the server to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<ConfigSetting>]
     def get_config(server_id, opts = {})
       data, _status_code, _headers = get_config_with_http_info(server_id, opts)
-      return data
+      data
     end
 
     # Returns all ConfigSettings for a single server
-    # 
     # @param server_id The id of the server to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<ConfigSetting>, Fixnum, Hash)>] Array<ConfigSetting> data, response status code and response headers
     def get_config_with_http_info(server_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ConfigApi.get_config ..."
+        @api_client.config.logger.debug 'Calling API: ConfigApi.get_config ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
         fail ArgumentError, "Missing the required parameter 'server_id' when calling ConfigApi.get_config"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/config".sub('{' + 'server_id' + '}', server_id.to_s)
+      local_var_path = '/servers/{server_id}/config'.sub('{' + 'server_id' + '}', server_id.to_s)
 
       # query parameters
       query_params = {}
@@ -74,7 +71,6 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Returns a specific ConfigSetting for a single server
     # NOT IMPLEMENTED
     # @param server_id The id of the server to retrieve
@@ -83,7 +79,7 @@ module PowerDNS
     # @return [ConfigSetting]
     def get_config_setting(server_id, config_setting_name, opts = {})
       data, _status_code, _headers = get_config_setting_with_http_info(server_id, config_setting_name, opts)
-      return data
+      data
     end
 
     # Returns a specific ConfigSetting for a single server
@@ -94,7 +90,7 @@ module PowerDNS
     # @return [Array<(ConfigSetting, Fixnum, Hash)>] ConfigSetting data, response status code and response headers
     def get_config_setting_with_http_info(server_id, config_setting_name, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ConfigApi.get_config_setting ..."
+        @api_client.config.logger.debug 'Calling API: ConfigApi.get_config_setting ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -105,7 +101,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'config_setting_name' when calling ConfigApi.get_config_setting"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/config/{config_setting_name}".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'config_setting_name' + '}', config_setting_name.to_s)
+      local_var_path = '/servers/{server_id}/config/{config_setting_name}'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'config_setting_name' + '}', config_setting_name.to_s)
 
       # query parameters
       query_params = {}

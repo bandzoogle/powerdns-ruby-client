@@ -11,5 +11,5 @@ Swagger Codegen version: 2.3.1
 =end
 
 module PowerDNS
-  VERSION = "0.0.1"
+  VERSION = '0.0.1'
 end

@@ -10,7 +10,7 @@ Swagger Codegen version: 2.3.1
 
 =end
 
-require "uri"
+require 'uri'
 
 module PowerDNS
   class ZonesApi
@@ -19,27 +19,24 @@ module PowerDNS
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-
     # Returns the zone in AXFR format.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param [Hash] opts the optional parameters
     # @return [String]
     def axfr_export_zone(server_id, zone_id, opts = {})
       data, _status_code, _headers = axfr_export_zone_with_http_info(server_id, zone_id, opts)
-      return data
+      data
     end
 
     # Returns the zone in AXFR format.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
     def axfr_export_zone_with_http_info(server_id, zone_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.axfr_export_zone ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.axfr_export_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -50,7 +47,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'zone_id' when calling ZonesApi.axfr_export_zone"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}/export".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}/export'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}
@@ -80,7 +77,6 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Send a DNS NOTIFY to all slaves.
     # Fails when zone kind is not Master or Slave, or master and slave are disabled in the configuration. Only works for Slave if renotify is on. Clients MUST NOT send a body.
     # @param server_id The id of the server to retrieve
@@ -89,7 +85,7 @@ module PowerDNS
     # @return [nil]
     def axfr_retrieve_zone(server_id, zone_id, opts = {})
       axfr_retrieve_zone_with_http_info(server_id, zone_id, opts)
-      return nil
+      nil
     end
 
     # Send a DNS NOTIFY to all slaves.
@@ -100,7 +96,7 @@ module PowerDNS
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def axfr_retrieve_zone_with_http_info(server_id, zone_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.axfr_retrieve_zone ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.axfr_retrieve_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -111,7 +107,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'zone_id' when calling ZonesApi.axfr_retrieve_zone"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}/axfr-retrieve".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}/axfr-retrieve'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}
@@ -140,27 +136,24 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Verify zone contents/configuration.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param [Hash] opts the optional parameters
     # @return [String]
     def check_zone(server_id, zone_id, opts = {})
       data, _status_code, _headers = check_zone_with_http_info(server_id, zone_id, opts)
-      return data
+      data
     end
 
     # Verify zone contents/configuration.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
     def check_zone_with_http_info(server_id, zone_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.check_zone ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.check_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -171,7 +164,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'zone_id' when calling ZonesApi.check_zone"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}/check".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}/check'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}
@@ -201,34 +194,31 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Creates a new domain, returns the Zone on creation.
-    # 
     # @param server_id The id of the server to retrieve
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :rrsets “true” (default) or “false”, whether to include the “rrsets” in the response Zone object. (default to true)
     # @return [Zone]
     def create_zone(server_id, opts = {})
       data, _status_code, _headers = create_zone_with_http_info(server_id, opts)
-      return data
+      data
     end
 
     # Creates a new domain, returns the Zone on creation.
-    # 
     # @param server_id The id of the server to retrieve
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :rrsets “true” (default) or “false”, whether to include the “rrsets” in the response Zone object.
     # @return [Array<(Zone, Fixnum, Hash)>] Zone data, response status code and response headers
     def create_zone_with_http_info(server_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.create_zone ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.create_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
         fail ArgumentError, "Missing the required parameter 'server_id' when calling ZonesApi.create_zone"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones".sub('{' + 'server_id' + '}', server_id.to_s)
+      local_var_path = '/servers/{server_id}/zones'.sub('{' + 'server_id' + '}', server_id.to_s)
 
       # query parameters
       query_params = {}
@@ -259,27 +249,24 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Deletes this zone, all attached metadata and rrsets.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def delete_zone(server_id, zone_id, opts = {})
       delete_zone_with_http_info(server_id, zone_id, opts)
-      return nil
+      nil
     end
 
     # Deletes this zone, all attached metadata and rrsets.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def delete_zone_with_http_info(server_id, zone_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.delete_zone ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.delete_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -290,7 +277,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'zone_id' when calling ZonesApi.delete_zone"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}
@@ -319,27 +306,24 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # zone managed by a server
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Zone]
     def list_zone(server_id, zone_id, opts = {})
       data, _status_code, _headers = list_zone_with_http_info(server_id, zone_id, opts)
-      return data
+      data
     end
 
     # zone managed by a server
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<(Zone, Fixnum, Hash)>] Zone data, response status code and response headers
     def list_zone_with_http_info(server_id, zone_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.list_zone ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.list_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -350,7 +334,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'zone_id' when calling ZonesApi.list_zone"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}
@@ -380,32 +364,29 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # List all Zones in a server
-    # 
     # @param server_id The id of the server to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<Zone>]
     def list_zones(server_id, opts = {})
       data, _status_code, _headers = list_zones_with_http_info(server_id, opts)
-      return data
+      data
     end
 
     # List all Zones in a server
-    # 
     # @param server_id The id of the server to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Zone>, Fixnum, Hash)>] Array<Zone> data, response status code and response headers
     def list_zones_with_http_info(server_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.list_zones ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.list_zones ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
         fail ArgumentError, "Missing the required parameter 'server_id' when calling ZonesApi.list_zones"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones".sub('{' + 'server_id' + '}', server_id.to_s)
+      local_var_path = '/servers/{server_id}/zones'.sub('{' + 'server_id' + '}', server_id.to_s)
 
       # query parameters
       query_params = {}
@@ -435,7 +416,6 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Send a DNS NOTIFY to all slaves.
     # Fails when zone kind is not Master or Slave, or master and slave are disabled in the configuration. Only works for Slave if renotify is on. Clients MUST NOT send a body.
     # @param server_id The id of the server to retrieve
@@ -444,7 +424,7 @@ module PowerDNS
     # @return [nil]
     def notify_zone(server_id, zone_id, opts = {})
       notify_zone_with_http_info(server_id, zone_id, opts)
-      return nil
+      nil
     end
 
     # Send a DNS NOTIFY to all slaves.
@@ -455,7 +435,7 @@ module PowerDNS
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def notify_zone_with_http_info(server_id, zone_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.notify_zone ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.notify_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -466,7 +446,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'zone_id' when calling ZonesApi.notify_zone"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}/notify".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}/notify'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}
@@ -495,9 +475,7 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Creates/modifies/deletes RRsets present in the payload and their comments. Returns 204 No Content on success.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id 
     # @param zone_struct The zone struct to patch with
@@ -505,11 +483,10 @@ module PowerDNS
     # @return [nil]
     def patch_zone(server_id, zone_id, zone_struct, opts = {})
       patch_zone_with_http_info(server_id, zone_id, zone_struct, opts)
-      return nil
+      nil
     end
 
     # Creates/modifies/deletes RRsets present in the payload and their comments. Returns 204 No Content on success.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id 
     # @param zone_struct The zone struct to patch with
@@ -517,7 +494,7 @@ module PowerDNS
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def patch_zone_with_http_info(server_id, zone_id, zone_struct, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.patch_zone ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.patch_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -532,7 +509,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'zone_struct' when calling ZonesApi.patch_zone"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}
@@ -561,7 +538,6 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Modifies basic zone data (metadata).
     # Allowed fields in client body: all except id, url and name. Returns 204 No Content on success.
     # @param server_id The id of the server to retrieve
@@ -571,7 +547,7 @@ module PowerDNS
     # @return [nil]
     def put_zone(server_id, zone_id, zone_struct, opts = {})
       put_zone_with_http_info(server_id, zone_id, zone_struct, opts)
-      return nil
+      nil
     end
 
     # Modifies basic zone data (metadata).
@@ -583,7 +559,7 @@ module PowerDNS
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def put_zone_with_http_info(server_id, zone_id, zone_struct, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.put_zone ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.put_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -598,7 +574,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'zone_struct' when calling ZonesApi.put_zone"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}
@@ -627,7 +603,6 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Rectify the zone data.
     # This does not take into account the API-RECTIFY metadata. Fails on slave zones and zones that do not have DNSSEC.
     # @param server_id The id of the server to retrieve
@@ -636,7 +611,7 @@ module PowerDNS
     # @return [String]
     def rectify_zone(server_id, zone_id, opts = {})
       data, _status_code, _headers = rectify_zone_with_http_info(server_id, zone_id, opts)
-      return data
+      data
     end
 
     # Rectify the zone data.
@@ -647,7 +622,7 @@ module PowerDNS
     # @return [Array<(String, Fixnum, Hash)>] String data, response status code and response headers
     def rectify_zone_with_http_info(server_id, zone_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonesApi.rectify_zone ..."
+        @api_client.config.logger.debug 'Calling API: ZonesApi.rectify_zone ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -658,7 +633,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'zone_id' when calling ZonesApi.rectify_zone"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}/rectify".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}/rectify'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}

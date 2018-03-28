@@ -33,4 +33,3 @@ describe 'SearchResults' do
     end
   end
 end
-

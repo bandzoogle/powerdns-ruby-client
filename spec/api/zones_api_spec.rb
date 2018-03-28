@@ -34,13 +34,12 @@ describe 'ZonesApi' do
 
   # unit tests for axfr_export_zone
   # Returns the zone in AXFR format.
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id The id of the zone to retrieve
   # @param [Hash] opts the optional parameters
   # @return [String]
   describe 'axfr_export_zone test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
@@ -53,71 +52,66 @@ describe 'ZonesApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'axfr_retrieve_zone test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for check_zone
   # Verify zone contents/configuration.
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id The id of the zone to retrieve
   # @param [Hash] opts the optional parameters
   # @return [String]
   describe 'check_zone test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for create_zone
   # Creates a new domain, returns the Zone on creation.
-  # 
   # @param server_id The id of the server to retrieve
   # @param [Hash] opts the optional parameters
   # @option opts [BOOLEAN] :rrsets “true” (default) or “false”, whether to include the “rrsets” in the response Zone object.
   # @return [Zone]
   describe 'create_zone test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for delete_zone
   # Deletes this zone, all attached metadata and rrsets.
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id The id of the zone to retrieve
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'delete_zone test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for list_zone
   # zone managed by a server
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id The id of the zone to retrieve
   # @param [Hash] opts the optional parameters
   # @return [Zone]
   describe 'list_zone test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for list_zones
   # List all Zones in a server
-  # 
   # @param server_id The id of the server to retrieve
   # @param [Hash] opts the optional parameters
   # @return [Array<Zone>]
   describe 'list_zones test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
@@ -130,21 +124,20 @@ describe 'ZonesApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'notify_zone test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for patch_zone
   # Creates/modifies/deletes RRsets present in the payload and their comments. Returns 204 No Content on success.
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id 
   # @param zone_struct The zone struct to patch with
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'patch_zone test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
@@ -158,7 +151,7 @@ describe 'ZonesApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'put_zone test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
@@ -171,7 +164,7 @@ describe 'ZonesApi' do
   # @param [Hash] opts the optional parameters
   # @return [String]
   describe 'rectify_zone test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end

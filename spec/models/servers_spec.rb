@@ -33,4 +33,3 @@ describe 'Servers' do
     end
   end
 end
-

@@ -41,55 +41,51 @@ describe 'ZonecryptokeyApi' do
   # @param [Hash] opts the optional parameters
   # @return [Cryptokey]
   describe 'create_cryptokey test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for delete_cryptokey
   # This method deletes a key specified by cryptokey_id.
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id The id of the zone to retrieve
   # @param cryptokey_id The id value of the Cryptokey
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'delete_cryptokey test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for get_cryptokey
   # Returns all data about the CryptoKey, including the privatekey.
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id The id of the zone to retrieve
   # @param cryptokey_id The id value of the CryptoKey
   # @param [Hash] opts the optional parameters
   # @return [Cryptokey]
   describe 'get_cryptokey test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for list_cryptokeys
   # Get all CryptoKeys for a zone, except the privatekey
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id The id of the zone to retrieve
   # @param [Hash] opts the optional parameters
   # @return [Array<Cryptokey>]
   describe 'list_cryptokeys test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for modify_cryptokey
   # This method (de)activates a key from zone_name specified by cryptokey_id
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id 
   # @param cryptokey_id Cryptokey to manipulate
@@ -97,7 +93,7 @@ describe 'ZonecryptokeyApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'modify_cryptokey test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end

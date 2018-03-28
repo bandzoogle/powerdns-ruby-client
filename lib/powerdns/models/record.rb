@@ -24,7 +24,6 @@ module PowerDNS
     # If set to true, the server will find the matching reverse zone and create a PTR there. Existing PTR records are replaced. If no matching reverse Zone, an error is thrown. Only valid in client bodies, only valid for A and AAAA types. Not returned by the server.
     attr_accessor :set_ptr
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -49,7 +48,7 @@ module PowerDNS
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'content')
         self.content = attributes[:'content']
@@ -62,7 +61,6 @@ module PowerDNS
       if attributes.has_key?(:'set-ptr')
         self.set_ptr = attributes[:'set-ptr']
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -70,14 +68,14 @@ module PowerDNS
     def list_invalid_properties
       invalid_properties = Array.new
       if @content.nil?
-        invalid_properties.push("invalid value for 'content', content cannot be nil.")
+        invalid_properties.push('invalid value for "content", content cannot be nil.')
       end
 
       if @disabled.nil?
-        invalid_properties.push("invalid value for 'disabled', disabled cannot be nil.")
+        invalid_properties.push('invalid value for "disabled", disabled cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -85,7 +83,7 @@ module PowerDNS
     def valid?
       return false if @content.nil?
       return false if @disabled.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -120,7 +118,7 @@ module PowerDNS
           # check to ensure the input is an array given that the the attribute
           # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
           end
         elsif !attributes[self.class.attribute_map[key]].nil?
           self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
@@ -202,7 +200,7 @@ module PowerDNS
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -213,7 +211,5 @@ module PowerDNS
         value
       end
     end
-
   end
-
 end

@@ -10,7 +10,7 @@ Swagger Codegen version: 2.3.1
 
 =end
 
-require "uri"
+require 'uri'
 
 module PowerDNS
   class StatsApi
@@ -19,7 +19,6 @@ module PowerDNS
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-
     # Query statistics.
     # Query PowerDNS internal statistics. Returns a list of BaseStatisticItem derived elements.
     # @param server_id The id of the server to retrieve
@@ -27,7 +26,7 @@ module PowerDNS
     # @return [Array<String>]
     def get_stats(server_id, opts = {})
       data, _status_code, _headers = get_stats_with_http_info(server_id, opts)
-      return data
+      data
     end
 
     # Query statistics.
@@ -37,14 +36,14 @@ module PowerDNS
     # @return [Array<(Array<String>, Fixnum, Hash)>] Array<String> data, response status code and response headers
     def get_stats_with_http_info(server_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: StatsApi.get_stats ..."
+        @api_client.config.logger.debug 'Calling API: StatsApi.get_stats ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
         fail ArgumentError, "Missing the required parameter 'server_id' when calling StatsApi.get_stats"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/statistics".sub('{' + 'server_id' + '}', server_id.to_s)
+      local_var_path = '/servers/{server_id}/statistics'.sub('{' + 'server_id' + '}', server_id.to_s)
 
       # query parameters
       query_params = {}

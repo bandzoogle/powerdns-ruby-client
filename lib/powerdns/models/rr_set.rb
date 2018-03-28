@@ -33,7 +33,6 @@ module PowerDNS
     # List of Comment. Must be empty when changetype is set to DELETE. An empty list results in deletion of all comments. modified_at is optional and defaults to the current server time.
     attr_accessor :comments
 
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -64,7 +63,7 @@ module PowerDNS
       return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+      attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
       if attributes.has_key?(:'name')
         self.name = attributes[:'name']
@@ -93,7 +92,6 @@ module PowerDNS
           self.comments = value
         end
       end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -101,26 +99,26 @@ module PowerDNS
     def list_invalid_properties
       invalid_properties = Array.new
       if @name.nil?
-        invalid_properties.push("invalid value for 'name', name cannot be nil.")
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
       if @type.nil?
-        invalid_properties.push("invalid value for 'type', type cannot be nil.")
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
 
       if @ttl.nil?
-        invalid_properties.push("invalid value for 'ttl', ttl cannot be nil.")
+        invalid_properties.push('invalid value for "ttl", ttl cannot be nil.')
       end
 
       if @changetype.nil?
-        invalid_properties.push("invalid value for 'changetype', changetype cannot be nil.")
+        invalid_properties.push('invalid value for "changetype", changetype cannot be nil.')
       end
 
       if @records.nil?
-        invalid_properties.push("invalid value for 'records', records cannot be nil.")
+        invalid_properties.push('invalid value for "records", records cannot be nil.')
       end
 
-      return invalid_properties
+      invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
@@ -131,7 +129,7 @@ module PowerDNS
       return false if @ttl.nil?
       return false if @changetype.nil?
       return false if @records.nil?
-      return true
+      true
     end
 
     # Checks equality by comparing each attribute.
@@ -169,7 +167,7 @@ module PowerDNS
           # check to ensure the input is an array given that the the attribute
           # is documented as an array but the input is not
           if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
           end
         elsif !attributes[self.class.attribute_map[key]].nil?
           self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
@@ -251,7 +249,7 @@ module PowerDNS
     # @return [Hash] Returns the value in the form of hash
     def _to_hash(value)
       if value.is_a?(Array)
-        value.compact.map{ |v| _to_hash(v) }
+        value.compact.map { |v| _to_hash(v) }
       elsif value.is_a?(Hash)
         {}.tap do |hash|
           value.each { |k, v| hash[k] = _to_hash(v) }
@@ -262,7 +260,5 @@ module PowerDNS
         value
       end
     end
-
   end
-
 end

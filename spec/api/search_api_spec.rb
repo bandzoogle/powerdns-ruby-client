@@ -41,20 +41,19 @@ describe 'SearchApi' do
   # @param [Hash] opts the optional parameters
   # @return [SearchResults]
   describe 'search_data test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for search_log
   # Query the log, filtered by search_term.
-  # 
   # @param server_id The id of the server to retrieve
   # @param q The string to search for
   # @param [Hash] opts the optional parameters
   # @return [Array<String>]
   describe 'search_log test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end

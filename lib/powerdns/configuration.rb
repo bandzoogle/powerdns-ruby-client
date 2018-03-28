@@ -170,7 +170,7 @@ module PowerDNS
     def base_path=(base_path)
       # Add leading and trailing slashes to base_path
       @base_path = "/#{base_path}".gsub(/\/+/, '/')
-      @base_path = "" if @base_path == "/"
+      @base_path = '' if @base_path == '/'
     end
 
     def base_url

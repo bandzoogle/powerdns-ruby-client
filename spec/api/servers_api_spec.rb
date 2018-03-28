@@ -34,23 +34,21 @@ describe 'ServersApi' do
 
   # unit tests for list_server
   # List a server
-  # 
   # @param server_id The id of the server to retrieve
   # @param [Hash] opts the optional parameters
   # @return [Server]
   describe 'list_server test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for list_servers
   # List all servers
-  # 
   # @param [Hash] opts the optional parameters
   # @return [Array<Server>]
   describe 'list_servers test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end

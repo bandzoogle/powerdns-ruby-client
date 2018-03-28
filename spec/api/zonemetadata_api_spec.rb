@@ -41,55 +41,51 @@ describe 'ZonemetadataApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'create_metadata test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for delete_metadata
   # Delete all items of a single kind of domain metadata.
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id The id of the zone to retrieve
   # @param metadata_kind ???
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'delete_metadata test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for get_metadata
   # Get the content of a single kind of domain metadata as a list of MetaData objects.
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id The id of the zone to retrieve
   # @param metadata_kind ???
   # @param [Hash] opts the optional parameters
   # @return [Metadata]
   describe 'get_metadata test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for list_metadata
   # Get all the MetaData associated with the zone.
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id The id of the zone to retrieve
   # @param [Hash] opts the optional parameters
   # @return [Array<Metadata>]
   describe 'list_metadata test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
   # unit tests for modify_metadata
   # Modify the content of a single kind of domain metadata.
-  # 
   # @param server_id The id of the server to retrieve
   # @param zone_id 
   # @param metadata_kind The kind of metadata
@@ -97,7 +93,7 @@ describe 'ZonemetadataApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'modify_metadata test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end

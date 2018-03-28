@@ -34,12 +34,11 @@ describe 'ConfigApi' do
 
   # unit tests for get_config
   # Returns all ConfigSettings for a single server
-  # 
   # @param server_id The id of the server to retrieve
   # @param [Hash] opts the optional parameters
   # @return [Array<ConfigSetting>]
   describe 'get_config test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
@@ -52,7 +51,7 @@ describe 'ConfigApi' do
   # @param [Hash] opts the optional parameters
   # @return [ConfigSetting]
   describe 'get_config_setting test' do
-    it "should work" do
+    it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end

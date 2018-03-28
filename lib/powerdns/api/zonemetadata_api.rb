@@ -10,7 +10,7 @@ Swagger Codegen version: 2.3.1
 
 =end
 
-require "uri"
+require 'uri'
 
 module PowerDNS
   class ZonemetadataApi
@@ -19,7 +19,6 @@ module PowerDNS
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-
     # Creates a set of metadata entries
     # Creates a set of metadata entries of given kind for the zone. Existing metadata entries for the zone with the same kind are not overwritten.
     # @param server_id The id of the server to retrieve
@@ -29,7 +28,7 @@ module PowerDNS
     # @return [nil]
     def create_metadata(server_id, zone_id, metadata, opts = {})
       create_metadata_with_http_info(server_id, zone_id, metadata, opts)
-      return nil
+      nil
     end
 
     # Creates a set of metadata entries
@@ -41,7 +40,7 @@ module PowerDNS
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def create_metadata_with_http_info(server_id, zone_id, metadata, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonemetadataApi.create_metadata ..."
+        @api_client.config.logger.debug 'Calling API: ZonemetadataApi.create_metadata ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -56,7 +55,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'metadata' when calling ZonemetadataApi.create_metadata"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}/metadata".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}/metadata'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}
@@ -85,9 +84,7 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Delete all items of a single kind of domain metadata.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param metadata_kind ???
@@ -95,11 +92,10 @@ module PowerDNS
     # @return [nil]
     def delete_metadata(server_id, zone_id, metadata_kind, opts = {})
       delete_metadata_with_http_info(server_id, zone_id, metadata_kind, opts)
-      return nil
+      nil
     end
 
     # Delete all items of a single kind of domain metadata.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param metadata_kind ???
@@ -107,7 +103,7 @@ module PowerDNS
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def delete_metadata_with_http_info(server_id, zone_id, metadata_kind, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonemetadataApi.delete_metadata ..."
+        @api_client.config.logger.debug 'Calling API: ZonemetadataApi.delete_metadata ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -122,7 +118,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'metadata_kind' when calling ZonemetadataApi.delete_metadata"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}/metadata/{metadata_kind}".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s).sub('{' + 'metadata_kind' + '}', metadata_kind.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}/metadata/{metadata_kind}'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s).sub('{' + 'metadata_kind' + '}', metadata_kind.to_s)
 
       # query parameters
       query_params = {}
@@ -151,9 +147,7 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Get the content of a single kind of domain metadata as a list of MetaData objects.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param metadata_kind ???
@@ -161,11 +155,10 @@ module PowerDNS
     # @return [Metadata]
     def get_metadata(server_id, zone_id, metadata_kind, opts = {})
       data, _status_code, _headers = get_metadata_with_http_info(server_id, zone_id, metadata_kind, opts)
-      return data
+      data
     end
 
     # Get the content of a single kind of domain metadata as a list of MetaData objects.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param metadata_kind ???
@@ -173,7 +166,7 @@ module PowerDNS
     # @return [Array<(Metadata, Fixnum, Hash)>] Metadata data, response status code and response headers
     def get_metadata_with_http_info(server_id, zone_id, metadata_kind, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonemetadataApi.get_metadata ..."
+        @api_client.config.logger.debug 'Calling API: ZonemetadataApi.get_metadata ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -188,7 +181,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'metadata_kind' when calling ZonemetadataApi.get_metadata"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}/metadata/{metadata_kind}".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s).sub('{' + 'metadata_kind' + '}', metadata_kind.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}/metadata/{metadata_kind}'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s).sub('{' + 'metadata_kind' + '}', metadata_kind.to_s)
 
       # query parameters
       query_params = {}
@@ -218,27 +211,24 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Get all the MetaData associated with the zone.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<Metadata>]
     def list_metadata(server_id, zone_id, opts = {})
       data, _status_code, _headers = list_metadata_with_http_info(server_id, zone_id, opts)
-      return data
+      data
     end
 
     # Get all the MetaData associated with the zone.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id The id of the zone to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Metadata>, Fixnum, Hash)>] Array<Metadata> data, response status code and response headers
     def list_metadata_with_http_info(server_id, zone_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonemetadataApi.list_metadata ..."
+        @api_client.config.logger.debug 'Calling API: ZonemetadataApi.list_metadata ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -249,7 +239,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'zone_id' when calling ZonemetadataApi.list_metadata"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}/metadata".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}/metadata'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s)
 
       # query parameters
       query_params = {}
@@ -279,9 +269,7 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # Modify the content of a single kind of domain metadata.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id 
     # @param metadata_kind The kind of metadata
@@ -290,11 +278,10 @@ module PowerDNS
     # @return [nil]
     def modify_metadata(server_id, zone_id, metadata_kind, metadata, opts = {})
       modify_metadata_with_http_info(server_id, zone_id, metadata_kind, metadata, opts)
-      return nil
+      nil
     end
 
     # Modify the content of a single kind of domain metadata.
-    # 
     # @param server_id The id of the server to retrieve
     # @param zone_id 
     # @param metadata_kind The kind of metadata
@@ -303,7 +290,7 @@ module PowerDNS
     # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
     def modify_metadata_with_http_info(server_id, zone_id, metadata_kind, metadata, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ZonemetadataApi.modify_metadata ..."
+        @api_client.config.logger.debug 'Calling API: ZonemetadataApi.modify_metadata ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
@@ -322,7 +309,7 @@ module PowerDNS
         fail ArgumentError, "Missing the required parameter 'metadata' when calling ZonemetadataApi.modify_metadata"
       end
       # resource path
-      local_var_path = "/servers/{server_id}/zones/{zone_id}/metadata/{metadata_kind}".sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s).sub('{' + 'metadata_kind' + '}', metadata_kind.to_s)
+      local_var_path = '/servers/{server_id}/zones/{zone_id}/metadata/{metadata_kind}'.sub('{' + 'server_id' + '}', server_id.to_s).sub('{' + 'zone_id' + '}', zone_id.to_s).sub('{' + 'metadata_kind' + '}', metadata_kind.to_s)
 
       # query parameters
       query_params = {}

@@ -14,11 +14,21 @@ require 'date'
 require 'json'
 require 'logger'
 require 'tempfile'
-require 'typhoeus'
 require 'uri'
+require 'net/http'
+require 'net/https'
 
 module PowerDNS
   class ApiClient
+
+    VERB_MAP = {
+      :get    => Net::HTTP::Get,
+      :patch => Net::HTTP::Patch,
+      :post   => Net::HTTP::Post,
+      :put    => Net::HTTP::Put,
+      :delete => Net::HTTP::Delete
+    }
+
     # The Configuration object holding settings to be used in the API client.
     attr_accessor :config
 
@@ -33,7 +43,7 @@ module PowerDNS
       @config = config
       @user_agent = "Swagger-Codegen/#{VERSION}/ruby"
       @default_headers = {
-        'Content-Type' => "application/json",
+        'Content-Type' => 'application/json',
         'User-Agent' => @user_agent
       }
     end
@@ -47,25 +57,28 @@ module PowerDNS
     # @return [Array<(Object, Fixnum, Hash)>] an array of 3 elements:
     #   the data deserialized from response body (could be nil), response status code and response headers.
     def call_api(http_method, path, opts = {})
-      request = build_request(http_method, path, opts)
-      response = request.run
+      #request = build_request(http_method, path, opts)
+      #response = request.run
+      response = execute_request(http_method, path, opts)
 
       if @config.debugging
         @config.logger.debug "HTTP response body ~BEGIN~\n#{response.body}\n~END~\n"
       end
 
-      unless response.success?
-        if response.timed_out?
+      code = response.code.to_i
+      success = code >= 200 && code < 300
+      unless success
+        if code == 408 || code == 504
           fail ApiError.new('Connection timed out')
-        elsif response.code == 0
+        elsif code == 0
           # Errors from libcurl will be made visible here
           fail ApiError.new(:code => 0,
                             :message => response.return_message)
         else
           fail ApiError.new(:code => response.code,
-                            :response_headers => response.headers,
+                            :response_headers => response.to_hash,
                             :response_body => response.body),
-               response.status_message
+               response.message
         end
       end
 
@@ -74,10 +87,11 @@ module PowerDNS
       else
         data = nil
       end
-      return data, response.code, response.headers
+
+      return data, response.code, response.to_hash
     end
 
-    # Builds the HTTP request
+    # Execute the HTTP request
     #
     # @param [String] http_method HTTP method/verb (e.g. POST)
     # @param [String] path URL path (e.g. /account/new)
@@ -85,10 +99,14 @@ module PowerDNS
     # @option opts [Hash] :query_params Query parameters
     # @option opts [Hash] :form_params Query parameters
     # @option opts [Object] :body HTTP body (JSON/XML)
-    # @return [Typhoeus::Request] A Typhoeus Request
-    def build_request(http_method, path, opts = {})
+    # @return [Net::HTTP::Response] A response
+    def execute_request(http_method, path, opts = {})
       url = build_request_url(path)
       http_method = http_method.to_sym.downcase
+
+      uri = URI.parse(url)
+      http = Net::HTTP.new(uri.host, uri.port)
+      path = uri.path
 
       header_params = @default_headers.merge(opts[:header_params] || {})
       query_params = opts[:query_params] || {}
@@ -96,36 +114,62 @@ module PowerDNS
 
       update_params_for_auth! header_params, query_params, opts[:auth_names]
 
-      # set ssl_verifyhosts option based on @config.verify_ssl_host (true/false)
-      _verify_ssl_host = @config.verify_ssl_host ? 2 : 0
+      if @config.timeout.to_i > 0
+        http.read_timeout = @config.timeout
+        http.continue_timeout = @config.timeout
+        http.open_timeout = @config.timeout
+        http.ssl_timeout = @config.timeout
+      end
+
+      if @config.verify_ssl
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+      else
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      end
+
+      if @config.cert_file
+        http.cert = @config.cert_file
+      end
+
+      if @config.key_file
+        http.key = @config.key_file
+      end
 
       req_opts = {
         :method => http_method,
-        :headers => header_params,
-        :params => query_params,
-        :params_encoding => @config.params_encoding,
-        :timeout => @config.timeout,
-        :ssl_verifypeer => @config.verify_ssl,
-        :ssl_verifyhost => _verify_ssl_host,
-        :sslcert => @config.cert_file,
-        :sslkey => @config.key_file,
-        :verbose => @config.debugging
       }
 
       # set custom cert, if provided
-      req_opts[:cainfo] = @config.ssl_ca_cert if @config.ssl_ca_cert
+      http.ca_file = @config.ssl_ca_cert if @config.ssl_ca_cert
+
+      request = VERB_MAP[http_method.to_sym].new(path)
 
       if [:post, :patch, :put, :delete].include?(http_method)
         req_body = build_request_body(header_params, form_params, opts[:body])
-        req_opts.update :body => req_body
+        #req_opts.update :body => req_body
+        request.body = req_body
         if @config.debugging
           @config.logger.debug "HTTP request body param ~BEGIN~\n#{req_body}\n~END~\n"
         end
       end
 
-      request = Typhoeus::Request.new(url, req_opts)
-      download_file(request) if opts[:return_type] == 'File'
-      request
+#      download_file(request) if opts[:return_type] == 'File'
+
+      if http_method == :get
+        path = encode_path_params(path, query_params)
+      end
+
+
+      header_params.each { |k, v|
+        request[k] = v
+      }
+
+      http.request(request) 
+    end
+
+    def encode_path_params(path, params)
+      encoded = URI.encode_www_form(params)
+      [path, encoded].join("?")
     end
 
     # Check if the given MIME is a JSON MIME.
@@ -137,7 +181,7 @@ module PowerDNS
     # @param [String] mime MIME
     # @return [Boolean] True if the MIME is application/json
     def json_mime?(mime)
-       (mime == "*/*") || !(mime =~ /Application\/.*json(?!p)(;.*)?/i).nil?
+      (mime == '*/*') || !(mime =~ /Application\/.*json(?!p)(;.*)?/i).nil?
     end
 
     # Deserialize the response to the given return type.
@@ -157,7 +201,7 @@ module PowerDNS
       return body if return_type == 'String'
 
       # ensuring a default content type
-      content_type = response.headers['Content-Type'] || 'application/json'
+      content_type = response['Content-Type'] || 'application/json'
 
       fail "Content-Type is not supported: #{content_type}" unless json_mime?(content_type)
 
@@ -201,12 +245,12 @@ module PowerDNS
       when /\AArray<(.+)>\z/
         # e.g. Array<Pet>
         sub_type = $1
-        data.map {|item| convert_to_type(item, sub_type) }
+        data.map { |item| convert_to_type(item, sub_type) }
       when /\AHash\<String, (.+)\>\z/
         # e.g. Hash<String, Integer>
         sub_type = $1
         {}.tap do |hash|
-          data.each {|k, v| hash[k] = convert_to_type(v, sub_type) }
+          data.each { |k, v| hash[k] = convert_to_type(v, sub_type) }
         end
       else
         # models, e.g. Pet
@@ -228,7 +272,7 @@ module PowerDNS
       encoding = nil
       request.on_headers do |response|
         content_disposition = response.headers['Content-Disposition']
-        if content_disposition and content_disposition =~ /filename=/i
+        if content_disposition && content_disposition =~ /filename=/i
           filename = content_disposition[/filename=['"]?([^'"\s]+)['"]?/, 1]
           prefix = sanitize_filename(filename)
         else
@@ -327,7 +371,7 @@ module PowerDNS
       return nil if accepts.nil? || accepts.empty?
       # use JSON when present, otherwise use all of the provided
       json_accept = accepts.find { |s| json_mime?(s) }
-      return json_accept || accepts.join(',')
+      json_accept || accepts.join(',')
     end
 
     # Return Content-Type header based on an array of content types provided.
@@ -338,7 +382,7 @@ module PowerDNS
       return 'application/json' if content_types.nil? || content_types.empty?
       # use JSON when present, otherwise use the first one
       json_content_type = content_types.find { |s| json_mime?(s) }
-      return json_content_type || content_types.first
+      json_content_type || content_types.first
     end
 
     # Convert object (array, hash, object, etc) to JSON string.
@@ -348,7 +392,7 @@ module PowerDNS
       return model if model.nil? || model.is_a?(String)
       local_body = nil
       if model.is_a?(Array)
-        local_body = model.map{|m| object_to_hash(m) }
+        local_body = model.map { |m| object_to_hash(m) }
       else
         local_body = object_to_hash(model)
       end

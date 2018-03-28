@@ -10,7 +10,7 @@ Swagger Codegen version: 2.3.1
 
 =end
 
-require "uri"
+require 'uri'
 
 module PowerDNS
   class ServersApi
@@ -19,32 +19,29 @@ module PowerDNS
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-
     # List a server
-    # 
     # @param server_id The id of the server to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Server]
     def list_server(server_id, opts = {})
       data, _status_code, _headers = list_server_with_http_info(server_id, opts)
-      return data
+      data
     end
 
     # List a server
-    # 
     # @param server_id The id of the server to retrieve
     # @param [Hash] opts the optional parameters
     # @return [Array<(Server, Fixnum, Hash)>] Server data, response status code and response headers
     def list_server_with_http_info(server_id, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ServersApi.list_server ..."
+        @api_client.config.logger.debug 'Calling API: ServersApi.list_server ...'
       end
       # verify the required parameter 'server_id' is set
       if @api_client.config.client_side_validation && server_id.nil?
         fail ArgumentError, "Missing the required parameter 'server_id' when calling ServersApi.list_server"
       end
       # resource path
-      local_var_path = "/servers/{server_id}".sub('{' + 'server_id' + '}', server_id.to_s)
+      local_var_path = '/servers/{server_id}'.sub('{' + 'server_id' + '}', server_id.to_s)
 
       # query parameters
       query_params = {}
@@ -74,26 +71,23 @@ module PowerDNS
       end
       return data, status_code, headers
     end
-
     # List all servers
-    # 
     # @param [Hash] opts the optional parameters
     # @return [Array<Server>]
     def list_servers(opts = {})
       data, _status_code, _headers = list_servers_with_http_info(opts)
-      return data
+      data
     end
 
     # List all servers
-    # 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Server>, Fixnum, Hash)>] Array<Server> data, response status code and response headers
     def list_servers_with_http_info(opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug "Calling API: ServersApi.list_servers ..."
+        @api_client.config.logger.debug 'Calling API: ServersApi.list_servers ...'
       end
       # resource path
-      local_var_path = "/servers"
+      local_var_path = '/servers'
 
       # query parameters
       query_params = {}
