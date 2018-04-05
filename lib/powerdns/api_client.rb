@@ -106,7 +106,7 @@ module PowerDNS
 
       uri = URI.parse(url)
       http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = @config.use_ssl || false
+      http.use_ssl = @config.scheme == "https"
       path = uri.path
 
       header_params = @default_headers.merge(opts[:header_params] || {})
